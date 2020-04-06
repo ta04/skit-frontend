@@ -61,4 +61,4 @@ def calculateResult():
     resp.headers['Access-Control-Allow-Headers'] = "Origin, Content-Type, X-Auth-Token"
     return resp
     
-app.run()
+app.run(host="0.0.0.0", port=80)
