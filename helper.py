@@ -1,10 +1,21 @@
 import libnum
 import hashlib
+import random
 
 
 def generateN():
     n = libnum.generate_prime(24)
     return n
+
+
+def generateV(n):
+    v = random.randint(1, n)
+    return v
+
+
+def generateC(n):
+    c = random.randint(1, n)
+    return c
 
 
 def calculateG(n):
@@ -19,6 +30,7 @@ def calculateG(n):
 
         if (exp == n-1):
             return rand
+
 
 def calculateX(password, n):
     x = int(hashlib.md5(password.encode()).hexdigest()[:8], 16) % n

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}SKit{% endblock %}
+
+{% block content %}
+<div id="my-data" ></div>
+
+<div class="container" style="padding-top: 2.5%; padding-bottom: 2.5%;">
+    <div class="row">
+        {% for product in products %}
+        <div class="card col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 18rem">
+            <img src="https://axa.co.id/wp-content/uploads/2018/04/TUPPERWAREECOFASHIONPINK_DETAIL1.jpg" class="card-img-top" alt="{{product[name]}}">
+            <div class="card-body">
+              <h5 class="card-title">{{ product['name'] }}</h5>
+              <p class="card-text">{{ product['description'] }}</p>
+              <p class="card-text">Rp. {{ product['price'] }},00</p>
+              <a href="/product/show?id={{ product['id'] }}"><button class="btn btn-outline-primary btn-sm">I Want This!</button></a>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    let token = JSON.parse('{{ token | tojson }}');
+    localStorage.setItem('token', token)
+</script>
+{% endblock %}
