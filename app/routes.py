@@ -62,7 +62,7 @@ def login():
         g, n = None, None
         payload = {
             "username": username,
-            "with_credentials": True
+            "with_credentials": False
         }
         response = requests.post(
             "http://localhost:50057/user/show", json=payload)
@@ -91,7 +91,6 @@ def login():
         payload = {
             "username": username,
             "r": f'{r}',
-            "c": c
         }
         response = requests.post(
             "http://localhost:50057/auth/auth2", json=payload)
@@ -106,7 +105,7 @@ def login():
 def home():
     query_parameters = request.args
     token = query_parameters.get('token')
-    
+
     response = requests.post("http://localhost:50057/product/index", json={})
     if response.status_code == 200:
         responseJson = response.json()
@@ -118,7 +117,7 @@ def home():
             return render_template('home.html', products=products)
 
 
-@ app.route('/calculateResult', methods=['GET'])
+@app.route('/calculateResult', methods=['GET'])
 def calculateResult():
     query_parameters = request.args
     g = int(query_parameters.get('g'))
@@ -127,5 +126,27 @@ def calculateResult():
     y = int(query_parameters.get('y'))
     c = int(query_parameters.get('c'))
     result = helper.calculateResult(g, r, n, y, c)
+    resp = make_response(jsonify(result=result))
+    return resp
+
+
+@app.route('/calculateT', methods=['GET'])
+def calculateT():
+    query_parameters = request.args
+    g = int(query_parameters.get('g'))
+    v = int(query_parameters.get('v'))
+    n = int(query_parameters.get('n'))
+    result = helper.calculateT(g, v, n)
+    resp = make_response(jsonify(result=result))
+    return resp
+
+
+@app.route('/calculateY', methods=['GET'])
+def calculateY():
+    query_parameters = request.args
+    g = int(query_parameters.get('g'))
+    x = int(query_parameters.get('x'))
+    n = int(query_parameters.get('n'))
+    result = helper.calculateT(g, x, n)
     resp = make_response(jsonify(result=result))
     return resp

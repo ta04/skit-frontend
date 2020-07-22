@@ -4,7 +4,7 @@ import random
 
 
 def generateN():
-    n = libnum.generate_prime(24)
+    n = libnum.generate_prime(12)
     return n
 
 
