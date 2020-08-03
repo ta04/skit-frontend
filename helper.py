@@ -13,11 +13,6 @@ def generateV(n):
     return v
 
 
-def generateC(n):
-    c = random.randint(1, n)
-    return c
-
-
 def calculateG(n):
     for x in range(1, n):
         rand = x
@@ -33,7 +28,7 @@ def calculateG(n):
 
 
 def calculateX(password, n):
-    x = int(hashlib.md5(password.encode()).hexdigest()[:8], 16) % n
+    x = int(hashlib.sha256(password.encode()).hexdigest()[:8], 16) % n
     return x
 
 
