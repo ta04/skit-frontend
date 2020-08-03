@@ -98,23 +98,23 @@ def login():
             responseJson = response.json()
             token = responseJson['token']
 
-            return redirect(url_for('home', token=token))
+            return redirect(url_for('home'))
 
 
 @app.route('/home', methods=['GET'])
 def home():
     query_parameters = request.args
-    token = query_parameters.get('token')
+    # token = query_parameters.get('token')
 
     response = requests.post("http://localhost:50057/product/index", json={})
     if response.status_code == 200:
         responseJson = response.json()
         products = responseJson['products']
 
-        if token:
-            return render_template('home.html', products=products, token=token)
-        else:
-            return render_template('home.html', products=products)
+        # if token:
+            # return render_template('home.html', products=products, token=token)
+        # else:
+        return render_template('home.html', products=products)
 
 
 @app.route('/calculateResult', methods=['GET'])
